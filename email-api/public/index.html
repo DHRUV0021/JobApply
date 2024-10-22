@@ -1,0 +1,221 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Companies</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <div class="background">
+            <div class="container">
+                <h1>Apply</h1>
+                <button id="start-button">Let's Start</button>
+                <div id="company-form" class="hidden">
+                    <form id="form" action="/add-company" method="POST">
+                        <div id="company-fields"></div>
+                        <button type="button" id="add-company">Add Company</button>
+                        <button type="submit">Send Mail</button>
+                    </form>
+                </div>
+                <div id="toast" class="toast hidden">Companies added and emails sent successfully!</div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('start-button').onclick = function () {
+                document.getElementById('company-form').classList.remove('hidden');
+                this.classList.add('hidden');
+                addCompanyRow();
+            };
+
+            function addCompanyRow() {
+                const div = document.createElement('div');
+                div.className = 'form-row';
+                div.innerHTML = `
+                <input type="text" name="name" placeholder="Company Name" required>
+                <input type="email" name="email" placeholder="Company Email" required>
+                <select name="category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Angular_Developer">Angular Developer</option>
+                    <option value="MEAN_stack_Developer">MEAN stack Developer</option>
+                </select>
+                <button type="button" class="remove-row hidden" onclick="removeRow(this)">−</button>
+            `;
+                document.getElementById('company-fields').appendChild(div);
+                updateRemoveButtonVisibility();
+            }
+
+            document.getElementById('add-company').onclick = function () {
+                addCompanyRow();
+            };
+
+            function removeRow(button) {
+                button.parentElement.remove();
+                updateRemoveButtonVisibility();
+            }
+
+            function updateRemoveButtonVisibility() {
+                const rows = document.querySelectorAll('.form-row');
+                rows.forEach((row, index) => {
+                    const removeButton = row.querySelector('.remove-row');
+                    removeButton.classList.toggle('hidden', index < 1); // Hide for the first row
+                });
+            }
+
+            document.getElementById('form').onsubmit = async function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);
+                const data = {};
+                formData.forEach((value, key) => {
+                    if (!data[key]) data[key] = [];
+                    data[key].push(value);
+                });
+
+                try {
+                    const response = await fetch('/add-company', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        showToast();
+                        this.reset();
+                        document.getElementById('company-fields').innerHTML = ''; // Clear fields
+                        addCompanyRow(); // Add one initial row
+                    } else {
+                        console.error('Failed to send data');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            };
+
+            function showToast() {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('hidden');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 3000);
+            }
+        </script>
+    </body>
+
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Companies</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <div class="background">
+            <div class="container">
+                <h1>Apply</h1>
+                <button id="start-button">Let's Start</button>
+                <div id="company-form" class="hidden">
+                    <form id="form" action="/add-company" method="POST">
+                        <div id="company-fields"></div>
+                        <button type="button" id="add-company">Add Company</button>
+                        <button type="submit">Send Mail</button>
+                    </form>
+                </div>
+                <div id="toast" class="toast hidden">Companies added and emails sent successfully!</div>
+            </div>
+        </div>
+
+        <script>
+            document.getElementById('start-button').onclick = function () {
+                document.getElementById('company-form').classList.remove('hidden');
+                this.classList.add('hidden');
+                addCompanyRow();
+            };
+
+            function addCompanyRow() {
+                const div = document.createElement('div');
+                div.className = 'form-row';
+                div.innerHTML =
+                    `<input type="text" name="name" placeholder="Company Name" required>
+                <input type="email" name="email" placeholder="Company Email" required>
+                <select name="category" required>
+                    <option value="" disabled selected>Select Category</option>
+                    <option value="Angular_Developer">Angular Developer</option>
+                    <option value="MEAN_stack_Developer">MEAN stack Developer</option>
+                </select>
+                <button type="button" class="remove-row hidden" onclick="removeRow(this)">−</button>`;
+                document.getElementById('company-fields').appendChild(div);
+                updateRemoveButtonVisibility();
+            }
+
+            document.getElementById('add-company').onclick = function () {
+                addCompanyRow();
+            };
+
+            function removeRow(button) {
+                button.parentElement.remove();
+                updateRemoveButtonVisibility();
+            }
+
+            function updateRemoveButtonVisibility() {
+                const rows = document.querySelectorAll('.form-row');
+                rows.forEach((row, index) => {
+                    const removeButton = row.querySelector('.remove-row');
+                    removeButton.classList.toggle('hidden', index < 1); // Hide for the first row
+                });
+            }
+
+            document.getElementById('form').onsubmit = async function (event) {
+                event.preventDefault();
+
+                const formData = new FormData(this);
+                const data = {};
+                formData.forEach((value, key) => {
+                    if (!data[key]) data[key] = [];
+                    data[key].push(value);
+                });
+
+                try {
+                    const response = await fetch('/add-company', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(data),
+                    });
+
+                    if (response.ok) {
+                        showToast();
+                        this.reset();
+                        document.getElementById('company-fields').innerHTML = ''; // Clear fields
+                        addCompanyRow(); // Add one initial row
+                    } else {
+                        console.error('Failed to send data');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                }
+            };
+
+            function showToast() {
+                const toast = document.getElementById('toast');
+                toast.classList.remove('hidden');
+                setTimeout(() => {
+                    toast.classList.add('hidden');
+                }, 3000);
+            }
+        </script>
+    </body>
+
+</html>
